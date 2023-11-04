@@ -23,8 +23,7 @@ selected = option_menu(
     }
 )
 
-    
-
+cwd = os.getcwd()    
 
 if selected == "Year":
     st.title(" :chart_with_upwards_trend: Drop-out Analysis")
@@ -36,7 +35,7 @@ if selected == "Year":
         st.write(filename)
         df = pd.read_csv(filename, encoding= "ISO-8859-1")
     else:
-        os.chdir(r"C:\Users\dell\Desktop\Drop-out Dashboard")
+        os.chdir(cwd)
         df = pd.read_csv("Drop_out_data.csv", encoding= "ISO-8859-1")
         
     with st.expander("View Data"):
@@ -97,7 +96,7 @@ if selected == "Year":
         st.write(filename)
         reason_df = pd.read_csv(filename, encoding= "ISO-8859-1")
     else:
-        os.chdir(r"C:\Users\dell\Desktop\Drop-out Dashboard")
+        os.chdir(cwd)
         reason_df = pd.read_csv("reason.csv", encoding= "ISO-8859-1")
         
     st.subheader("Droup-out reason") 
@@ -119,13 +118,13 @@ if selected == "State":
         st.write(filename)
         df = pd.read_csv(filename, encoding= "ISO-8859-1")
     else:
-        os.chdir(r"C:\Users\dell\Desktop\Drop-out Dashboard")
+        os.chdir(cwd)
         df = pd.read_csv("Drop_out_data.csv", encoding= "ISO-8859-1")
         
 
     with st.expander("View Data"):
         # st.dataframe(df)
-        st.write(df.style.background_gradient(cmap="Blues"))
+        st.write(df.style.background_gradient(cmap="Oranges"))
 
         
         
@@ -171,8 +170,6 @@ if selected == "State":
                     , names=["Primary", "Upper Primary", "Secondary", "Upper Secondary"], hole=0.5)
         # fig.update_traces(text = df3["Total"], textposition = "outside")
         st.plotly_chart(fig, use_container_width=True)
-        
-    
     
     fl1 = st.file_uploader(":file_folder: Upload a file", type=(["csv", "txt", "xlsx", "xls"]), key="2")
     if fl1 is not None:
@@ -180,14 +177,14 @@ if selected == "State":
         st.write(filename)
         reason_df = pd.read_csv(filename, encoding= "ISO-88-1")
     else:
-        os.chdir(r"C:\Users\dell\Desktop\Drop-out Dashboard")
+        os.chdir(cwd)
         reason_df = pd.read_csv("reason.csv", encoding= "ISO-8859-1")
     
     st.subheader("Droup-out reason")   
     colors = {'male' : "#0C3B5D", 'female' : "#3EC1CD"}
     fig2 = px.bar(reason_df, x = "Ratio", y = "reasons", color="Gender", barmode="group", orientation="h", color_discrete_map=colors)
     st.plotly_chart(fig2, use_container_width=True)
-            
+
         
     
-    
+        
